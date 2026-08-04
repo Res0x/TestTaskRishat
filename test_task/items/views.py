@@ -10,10 +10,10 @@ def home(request):
     }
     return render(request, 'items/home.html', context)
 
-def buy(request, item_id):
+def item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     context = {
         'page_title': f'Page of {item.name}',
         'item': item,
     }
-    return render(request, 'items/buy.html', context)
+    return render(request, 'items/item.html', context)

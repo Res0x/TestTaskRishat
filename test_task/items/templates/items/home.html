@@ -2,6 +2,6 @@
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
     {% for item in items %}
-        <a href="{% url 'buy' item_id=item.pk %}">Buy {{ item.name }}</a>
+        <a href="{% url 'item' item_id=item.pk %}">{{ item.name }} page</a>
     {% endfor %}
 {% endblock %}

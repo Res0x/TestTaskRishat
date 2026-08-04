@@ -8,8 +8,8 @@ urlpatterns = [
         name='home'
     ),
     path(
-        'buy/<int:item_id>',
-        views.buy,
-        name='buy',
+        'item/<int:item_id>',
+        views.item,
+        name='item',
     )
 ]
