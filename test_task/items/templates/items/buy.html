@@ -1,0 +1,12 @@
+{% extends 'items/base.html' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <div>
+        <h1>{{ page_title }}</h1>
+    </div>
+    <section>
+        <p>{{ item.name }}</p>
+        <p>{{ item.description }}</p>
+        <p>{{ item.price }}$</p>
+    </section>
+{% endblock %}

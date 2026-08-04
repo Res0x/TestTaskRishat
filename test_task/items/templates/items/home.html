@@ -1,0 +1,7 @@
+{% extends 'items/base.html' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    {% for item in items %}
+        <a href="{% url 'buy' item_id=item.pk %}">Buy {{ item.name }}</a>
+    {% endfor %}
+{% endblock %}

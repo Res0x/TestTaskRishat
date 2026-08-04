@@ -1,0 +1,13 @@
+div {
+    background-color: antiquewhite;
+    font-size: 32px;
+    font-weight: 700;
+    border: 1px solid antiquewhite;
+    border-radius: 12px;
+}
+
+body {
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+}
