@@ -35,7 +35,7 @@ def buy(request, buy_item_id=None, buy_order_id=None):
             status=400,
         )
 
-    def create_line_item(item):
+    def create_line_item(item, tax=None):
         line_item = {
             'price_data': {
                 'currency': 'usd',
@@ -47,11 +47,12 @@ def buy(request, buy_item_id=None, buy_order_id=None):
             },
             'quantity': 1,
         }
+        if tax is not None:
+            line_item['tax_rates'] = [tax]
         return line_item
 
     line_items = None
     cancel_url = None
-    have_discount = False
     discounts = []
 
     if buy_item_id is not None:
@@ -64,7 +65,8 @@ def buy(request, buy_item_id=None, buy_order_id=None):
 
     elif buy_order_id is not None:
         order = get_object_or_404(Order, pk=buy_order_id)
-        line_items = [create_line_item(item) for item in order.items.all()]
+        order_tax = order.tax.stripe_tax_id if order.tax is not None else None
+        line_items = [create_line_item(item, order_tax) for item in order.items.all()]
         if order.discount is not None:
             discounts = [
                 {
@@ -101,10 +103,15 @@ def success(request):
 
 def order_detail(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
-    total_price = order.items.aggregate(Sum('price'))['price__sum'] or 0
+    price = order.items.aggregate(Sum('price'))['price__sum'] or 0
+    if order.discount is not None:
+        price -= (price * order.discount.percent) / 100
+    if order.tax is not None and not order.tax.inclusive:
+        price += (price * order.tax.percent) / 100
+    price = round(price, 2)
     context = {
         'page_title': f'Order {order.pk} placement',
-        'total_price': total_price,
+        'price': price,
         'order': order,
     }
     return render(request, 'items/order.html', context)

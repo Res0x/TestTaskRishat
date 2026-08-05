@@ -15,8 +15,11 @@
         {% if order.discount %}
             <h3>Discount: {{ order.discount.percent }}%</h3>
         {% endif %}
+        {% if order.tax and not order.tax.inclusive %}
+            <h3>Tax: {{ order.tax.percent }}%</h3>
+        {% endif %}
         <h2>Total</h2>
-        <p>{{ total_price }}$</p>
+        <p>{{ price }}$</p>
         <button id="buy-button" >Buy order №{{ order.pk }}</button>
         <script>
             const buyButton = document.getElementById("buy-button");

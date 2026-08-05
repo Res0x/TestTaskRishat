@@ -32,7 +32,18 @@ class Order(models.Model):
         related_name='orders',
         blank=True,
     )
-    discount = models.ForeignKey('Discount', on_delete=models.SET_NULL, null=True, blank=True)
+    discount = models.ForeignKey(
+        'Discount',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    tax = models.ForeignKey(
+        'Tax',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'Заказ'
@@ -40,3 +51,16 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order {self.pk}'
+
+class Tax(models.Model):
+    name = models.CharField(max_length=100)
+    percent = models.DecimalField(max_digits=5, decimal_places=2)
+    stripe_tax_id = models.CharField(max_length=100, unique=True)
+    inclusive = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Налог'
+        verbose_name_plural = 'Налоги'
+
+    def __str__(self):
+        return self.name

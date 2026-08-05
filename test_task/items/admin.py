@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import Item, Order, Discount
+from .models import Item, Order, Discount, Tax
 
 
 @admin.register(Item)
@@ -13,4 +12,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Discount)
 class DiscountAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Tax)
+class TaxAdmin(admin.ModelAdmin):
     pass
