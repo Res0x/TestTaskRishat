@@ -5,13 +5,19 @@
         <h1>{{ page_title }}</h1>
     </div>
     <section>
-        <p>{{ item.name }}</p>
-        <p>{{ item.description }}</p>
-        <p>{{ item.price }}$</p>
-        <button id="buy-button" >Buy {{ item.name }}</button>
+        <h2>Cart</h2>
+        {% for item in order.items.all %}
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.name }}</p>
+            <p>{{ item.description }}</p>
+            <p>{{ item.price }}$</p>
+        {% endfor %}
+        <h2>Total</h2>
+        <p>{{ total_price }}$</p>
+        <button id="buy-button" >Buy order №{{ order.pk }}</button>
         <script>
             const buyButton = document.getElementById("buy-button");
-            const buyUrl = "{% url 'item_buy' buy_item_id=item.pk %}";
+            const buyUrl = "{% url 'order_buy' buy_order_id=order.pk %}";
             buyButton.addEventListener("click", async function () {
                 const response = await fetch(buyUrl);
                 const session = await response.json();
