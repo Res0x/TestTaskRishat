@@ -53,6 +53,7 @@ def buy(request, buy_id):
     )
     return JsonResponse({
         'id': session.id,
+        'url': session.url
     })
 
 def success(request):

@@ -8,6 +8,15 @@
         <p>{{ item.name }}</p>
         <p>{{ item.description }}</p>
         <p>{{ item.price }}$</p>
-        <a href="{% url 'buy' buy_id=item.pk %}">Buy {{ item.name }}</a>
+        <button id="buy-button" >Buy {{ item.name }}</button>
+        <script>
+            const buyButton = document.getElementById("buy-button");
+            const buyUrl = "{% url 'buy' buy_id=item.pk %}";
+            buyButton.addEventListener("click", async function () {
+                const response = await fetch(buyUrl);
+                const session = await response.json();
+                window.location.href = session.url;
+            });
+        </script>
     </section>
 {% endblock %}
