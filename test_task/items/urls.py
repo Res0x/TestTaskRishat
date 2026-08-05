@@ -11,5 +11,15 @@ urlpatterns = [
         'item/<int:item_id>',
         views.item,
         name='item',
+    ),
+    path(
+        'buy/<int:buy_id>',
+        views.buy,
+        name='buy',
+    ),
+    path(
+        'success',
+        views.success,
+        name='success',
     )
 ]

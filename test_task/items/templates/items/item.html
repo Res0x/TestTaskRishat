@@ -8,5 +8,6 @@
         <p>{{ item.name }}</p>
         <p>{{ item.description }}</p>
         <p>{{ item.price }}$</p>
+        <a href="{% url 'buy' buy_id=item.pk %}">Buy {{ item.name }}</a>
     </section>
 {% endblock %}
