@@ -8,10 +8,13 @@
         <h2>Cart</h2>
         {% for item in order.items.all %}
             <h3>{{ item.name }}</h3>
-            <p>{{ item.name }}</p>
-            <p>{{ item.description }}</p>
-            <p>{{ item.price }}$</p>
+            <p>Name: {{ item.name }}</p>
+            <p>Description: {{ item.description }}</p>
+            <p>Price: {{ item.price }}$</p>
         {% endfor %}
+        {% if order.discount %}
+            <h3>Discount: {{ order.discount.percent }}%</h3>
+        {% endif %}
         <h2>Total</h2>
         <p>{{ total_price }}$</p>
         <button id="buy-button" >Buy order №{{ order.pk }}</button>

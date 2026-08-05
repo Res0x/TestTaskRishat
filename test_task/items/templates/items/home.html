@@ -1,7 +1,17 @@
 {% extends 'items/base.html' %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
-    {% for item in items %}
-        <p><a href="{% url 'item' item_id=item.pk %}">{{ item.name }} page</a></p>
-    {% endfor %}
+    <h1>{{ page_title }}</h1>
+    <section>
+        <h2>Items</h2>
+        {% for item in items %}
+            <p><a href="{% url 'item' item_id=item.pk %}">{{ item.name }} page</a></p>
+        {% endfor %}
+    </section>
+    <section>
+        <h2>Orders</h2>
+        {% for order in orders %}
+            <p><a href="{% url 'order' order_id=order.pk %}">Page of order №{{ order.pk }}</a></p>
+        {% endfor %}
+    </section>
 {% endblock %}
