@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'test_task.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-SQLITE_PATH = os.getenv('DB_PATH')
+SQLITE_PATH = os.getenv('SQLITE_PATH')
 
 DATABASES = {
     'default': {
