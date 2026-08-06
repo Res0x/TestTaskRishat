@@ -6,6 +6,9 @@ services:
     env_file:
       - .env
 
+    environment:
+      SQLITE_PATH: /app/data/db.sqlite3
+
     ports:
       - "8000:8000"
 
